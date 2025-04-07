@@ -1,0 +1,123 @@
+/* General body styling */
+body {
+    background: linear-gradient(to bottom right, #677e15, #ffffff);
+    height: 100vh;
+    font-family:  Geneva, Verdana, sans-serif;
+}
+
+
+#card {
+    background-color: #e3f7fc;
+    border: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.create-blog-btn {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+
+.create-blog-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Form elements styling */
+#content,
+#title,
+#category,
+#date,
+#postedby {
+    border: 2px solid #ced4da;
+    
+    transition: all 0.3s ease;
+}
+
+#content:focus,
+#title:focus,
+#category:focus,
+#date:focus,
+#postedby:focus {
+    border-color: orangered !important;
+    outline: none !important;
+    box-shadow: 0 0 5px orangered !important;
+}
+
+/* Form structure for left-aligned labels */
+.form-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.col-form-label {
+    font-weight: 500;
+    color: #333;
+    padding-right: 1rem;
+    text-align: right;
+}
+
+/* Improve label alignment */
+.text-sm-end {
+    text-align: right;
+    padding-right: 15px;
+}
+
+/* Button styling */
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    border-color: #6c757d;
+    transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+    background-color: #545b62;
+    border-color: #545b62;
+}
+
+/* Blog card styling */
+#blogsContainer .card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-left: 4px solid #2020d3;
+}
+
+#blogsContainer .card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Blog actions styling */
+.blog-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.custom-card {
+    background: white;
+    border-left: 5px solid #007bff;
+    border-radius: 10px;
+    transition: transform 0.2s ease;
+  }
+  
+  .custom-card:hover {
+    transform: scale(1.01);
+  }
+  
+
+
+
