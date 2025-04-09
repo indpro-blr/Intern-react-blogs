@@ -9,10 +9,42 @@
   },
   {
     "id": 2,
-    "title": "heyy",
+    "title": "HEyyyy",
+    "category": "lifestyle",
+    "content": "<h2>HEyyyyy</h2>",
+    "postedBy": "vinod",
+    "date": "4/8/2025 6:01:05 PM"
+  },
+  {
+    "id": 3,
+    "title": "heylllooo",
+    "category": "lifestyle",
+    "content": "<h1>heyyy</h1>",
+    "postedBy": "vinod",
+    "date": "4/8/2025 6:10:50 PM"
+  },
+  {
+    "id": 4,
+    "title": "madhumitha",
+    "category": "tech",
+    "content": "<h1>madhumitha</h1>",
+    "postedBy": "vinod",
+    "date": "4/8/2025 6:11:48 PM"
+  },
+  {
+    "id": 5,
+    "title": "madhu",
+    "category": "lifestyle",
+    "content": "<p>heyyyy</p>",
+    "postedBy": "madhumitha",
+    "date": "4/8/2025 6:12:17 PM"
+  },
+  {
+    "id": 6,
+    "title": "heyyy",
     "category": "education",
     "content": "<p>hey</p>",
-    "postedBy": "madhumitha",
-    "date": "4/8/2025 12:06:29 AM"
+    "postedBy": "vinod",
+    "date": "4/8/2025 6:40:09 PM"
   }
 ]

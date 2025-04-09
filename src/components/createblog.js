@@ -17,7 +17,7 @@ const CreateBlog = () => {
 
   const navigate = useNavigate();
 
-  // Auto-generate current date and time
+  
   useEffect(() => {
     const currentDate = new Date();
     const formattedDate = currentDate.toLocaleDateString();
