@@ -57,7 +57,7 @@ app.post("/bloglist", (req, res) => {
 });
 
 
-app.get("/getblogs", (req, res) => {
+app.get("/list", (req, res) => {
   const blogs = readDataFromFile();
   res.json(blogs);
 });

@@ -6,28 +6,27 @@ import { useNavigate } from "react-router-dom";
 const BlogList = () => {
   const navigate = useNavigate();
   const [blogs, setBlogs] = useState([]);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:5000/getblogs")
+    fetch("http://localhost:5000/list")
       .then((response) => response.json())
       .then((data) => {
         setBlogs(data);
-        setLoading(false);
+      
       })
       .catch((error) => {
         console.error("Error fetching blogs:", error);
-        setLoading(false);
+        
       });
   }, []);
 
-  if (loading) return <div>Loading...</div>;
+  
 
   return (
     <div className="container mt-4">
       <h1 className="text-center mb-4">All Blogs</h1>
       <div className="text-center mb-4">
-        <button className="btn btn-primary" onClick={() => navigate("/")}>
+        <button className="btn btn-primary" onClick={() => navigate("/create")}>
           Create New Blog
         </button>
       </div>
