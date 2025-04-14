@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom"; 
-import "./style.css";
-import "bootstrap/dist/css/bootstrap.min.css";
-import { Form, Button, Card, Container, Row, Col } from "react-bootstrap";
+import { useLocation, useNavigate } from "react-router-dom";
+import { Container, Card, Form, Row, Col, Button } from "react-bootstrap";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
 const CreateBlog = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     title: "",
     category: "",
@@ -15,18 +15,12 @@ const CreateBlog = () => {
     date: "",
   });
 
-  const navigate = useNavigate();
-
-  
+  // Pre-fill form if editing
   useEffect(() => {
-    const currentDate = new Date();
-    const formattedDate = currentDate.toLocaleDateString();
-    const formattedTime = currentDate.toLocaleTimeString();
-    setFormData((prev) => ({
-      ...prev,
-      date: `${formattedDate} ${formattedTime}`,
-    }));
-  }, []);
+    if (location.state && location.state.blog) {
+      setFormData(location.state.blog);
+    }
+  }, [location.state]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -41,8 +35,13 @@ const CreateBlog = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:5000/bloglist", {
-        method: "POST",
+      const method = formData.id ? "PUT" : "POST"; // Use PUT if editing, POST if creating
+      const url = formData.id
+        ? `http://localhost:5000/bloglist/${formData.id}`
+        : "http://localhost:5000/bloglist";
+
+      const response = await fetch(url, {
+        method,
         headers: {
           "Content-Type": "application/json",
         },
@@ -51,17 +50,18 @@ const CreateBlog = () => {
 
       if (response.ok) {
         const result = await response.json();
-        console.log("Blog created successfully:", result);
-        alert("Blog created successfully!");
-        navigate("/blogpage"); // Navigate to the blog list page
+        alert(
+          formData.id
+            ? "Blog updated successfully!"
+            : "Blog created successfully!"
+        );
+        navigate("/list");
       } else {
-        const error = await response.text();
-        console.error("Failed to create blog:", error);
-        alert("Something went wrong while creating the blog.");
+        alert("Failed to save the blog.");
       }
     } catch (error) {
       console.error("Error during submission:", error);
-      alert("Network error. Please try again later.");
+      alert("An error occurred while saving the blog.");
     }
   };
 
@@ -69,7 +69,7 @@ const CreateBlog = () => {
     <Container className="mt-3 mt-md-5">
       <Card className="shadow-sm">
         <Card.Header className="bg-light py-3">
-          <h3 className="m-0">Create New Blog</h3>
+          <h3 className="m-0">{formData.id ? "Edit Blog" : "Create New Blog"}</h3>
         </Card.Header>
         <Card.Body>
           <Form onSubmit={handleSubmit}>
@@ -94,18 +94,14 @@ const CreateBlog = () => {
                 Category
               </Form.Label>
               <Col md={7}>
-                <Form.Select
+                <Form.Control
+                  type="text"
                   name="category"
+                  placeholder="Enter blog category"
                   value={formData.category}
                   onChange={handleInputChange}
                   required
-                >
-                  <option value="">Select Category</option>
-                  <option value="tech">Tech</option>
-                  <option value="lifestyle">Lifestyle</option>
-                  <option value="education">Education</option>
-                  <option value="movies">Movies</option>
-                </Form.Select>
+                />
               </Col>
             </Form.Group>
 
@@ -129,18 +125,14 @@ const CreateBlog = () => {
                 Posted By
               </Form.Label>
               <Col md={7}>
-                <Form.Select
+                <Form.Control
+                  type="text"
                   name="postedBy"
+                  placeholder="Enter author name"
                   value={formData.postedBy}
                   onChange={handleInputChange}
                   required
-                >
-                  <option value="">Posted by</option>
-                  <option value="vijay">Vijay</option>
-                  <option value="vinod">Vinod</option>
-                  <option value="madhumitha">Madhumitha</option>
-                  <option value="samantha">Samantha</option>
-                </Form.Select>
+                />
               </Col>
             </Form.Group>
 
@@ -149,15 +141,26 @@ const CreateBlog = () => {
                 Publish Date
               </Form.Label>
               <Col md={7}>
-                <Form.Control type="text" value={formData.date} readOnly />
+                <Form.Control
+                  type="text"
+                  name="date"
+                  placeholder="Enter publish date"
+                  value={formData.date}
+                  onChange={handleInputChange}
+                  required
+                />
               </Col>
             </Form.Group>
 
             <div className="d-flex justify-content-center gap-2 mt-3">
               <Button type="submit" variant="primary">
-                Save
+                {formData.id ? "Update" : "Save"}
               </Button>
-              <Button type="button" variant="secondary" onClick={() => navigate("/blogpage")}>
+              <Button
+                type="button"
+                variant="secondary"
+                onClick={() => navigate("/list")}
+              >
                 Cancel
               </Button>
             </div>
